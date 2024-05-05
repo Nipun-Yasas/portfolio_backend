@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
+// this is the entry point//
 
 require('dotenv').config();
 const Project = require('./Project');
