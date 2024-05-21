@@ -8,6 +8,10 @@ require('dotenv').config();
 const Project = require('./Project');
 const Blog = require('./Blog');
 
+//parse json data
+
+app.use(express.json());   
+
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
