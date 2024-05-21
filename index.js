@@ -31,10 +31,10 @@ app.post("/projects", async (req, res) => {
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
-  });
+});
   
-  //create a endpoint for updating a project by id
-  app.patch("/projects/:id", async (req, res) => {
+//create a endpoint for updating a project by id
+app.patch("/projects/:id", async (req, res) => {
     try {
       const project = await Project.findById(req.params.id);
       if (project) {
@@ -47,9 +47,10 @@ app.post("/projects", async (req, res) => {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-  });
-  
-  app.delete("/projects/:id", async (req, res) => {
+});
+
+//create a endpoint for delete a project by id
+app.delete("/projects/:id", async (req, res) => {
     try {
       const result = await Project.findByIdAndDelete(req.params.id);
       if (result) {
@@ -60,10 +61,9 @@ app.post("/projects", async (req, res) => {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-  });
+});
   
-
-//create an endpoint for creating a project
+//create an endpoint for creating a blog
 
 app.get('/blogs', async (req, res) => {
     try {
