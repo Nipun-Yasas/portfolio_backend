@@ -26,6 +26,7 @@ app.get('/projects', async (req, res) => {
 });
 
 //create a endpoint for creating a project
+
 app.post("/projects", async (req, res) => {
     const project = new Project(req.body);
   
@@ -38,6 +39,7 @@ app.post("/projects", async (req, res) => {
 });
   
 //create a endpoint for updating a project by id
+
 app.patch("/projects/:id", async (req, res) => {
     try {
       const project = await Project.findById(req.params.id);
@@ -54,6 +56,7 @@ app.patch("/projects/:id", async (req, res) => {
 });
 
 //create a endpoint for delete a project by id
+
 app.delete("/projects/:id", async (req, res) => {
     try {
       const result = await Project.findByIdAndDelete(req.params.id);
@@ -67,8 +70,6 @@ app.delete("/projects/:id", async (req, res) => {
     }
 });
   
-//create an endpoint for creating a blog
-
 app.get('/blogs', async (req, res) => {
     try {
         const blogs = await Blog.find();
@@ -76,6 +77,51 @@ app.get('/blogs', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
+});
+
+//create a endpoint for creating a blog
+
+app.post("/blogs", async (req, res) => {
+  const blog = new Blog(req.body);
+
+  try {
+    const newBlog = await blog.save();
+    res.status(201).json(newBlog);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//create a endpoint for updating a blog by id
+
+app.patch("/blogs/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (blog) {
+      blog.set(req.body);
+      const updatedBlog = await blog.save();
+      res.json(updatedBlog);
+    } else {
+      res.status(404).json({ message: "Blog not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+//create a endpoint for delete a blog by id
+
+app.delete("/blogs/:id", async (req, res) => {
+  try {
+    const result = await Blog.findByIdAndDelete(req.params.id);
+    if (result) {
+      res.json({ message: "Blog deleted" });
+    } else {
+      res.status(404).json({ message: "Blog not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 app.listen(port, () => {
