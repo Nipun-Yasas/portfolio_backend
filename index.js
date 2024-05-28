@@ -2,11 +2,14 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
-// this is the entry point//
+// this is the entry point
 
 require('dotenv').config();
 const Project = require('./Project');
 const Blog = require('./Blog');
+
+const cors = require('cors');
+app.use(cors());
 
 //parse json data
 
@@ -127,3 +130,4 @@ app.delete("/blogs/:id", async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
 });
+
